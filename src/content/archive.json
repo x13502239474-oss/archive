@@ -150,10 +150,10 @@
     {
       "id": "still-reading",
       "code": "DP·2024·01",
-      "title": "静读",
+      "title": "教父",
       "titleEn": "STILL READING",
-      "category": "digital-products",
-      "year": 2024,
+      "category": "creative-works",
+      "year": 2026,
       "month": 11,
       "order": 100,
       "featured": true,
@@ -168,7 +168,8 @@
           "motif": "stack",
           "tone": "paper",
           "density": 7
-        }
+        },
+        "src": "//images/still-reading/cover.jpg"
       },
       "gallery": [
         {
