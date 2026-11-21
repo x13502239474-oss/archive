@@ -46,7 +46,7 @@ https://<你的用户名>.github.io/<仓库名>/
 | --- | --- |
 | GitHub 用户名 | 比如 `x13502239474-oss` |
 | 仓库名 | 比如 `archive` |
-| 访问令牌 | 见下面四步生成 |
+| 访问令牌 | 见下面四步生成。已有的 Classic token（带 `repo` 权限）也能直接用 |
 
 ### 生成令牌（只需一次）
 
@@ -56,6 +56,8 @@ https://<你的用户名>.github.io/<仓库名>/
 4. Permissions → **Contents** 选 **Read and write**，然后 Generate token
 
 复制生成的令牌粘进后台，点「连接」。令牌只存在你自己这台设备的浏览器里，不会写进代码。
+
+> 令牌只要是「对该仓库有 Contents 读写权限」就行。Fine-grained 更安全（只限一个仓库），Classic 勾了 `repo` 也能用。
 
 ### 之后每次加作品
 

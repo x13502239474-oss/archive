@@ -446,7 +446,7 @@ export default function Admin() {
             </Field>
             <Field
               label="访问令牌"
-              hint="需要 Fine-grained token，勾选该仓库的 Contents: Read and write"
+              hint="Fine-grained 或 Classic 都行，只要有该仓库的 Contents 读写权限"
             >
               <input
                 className="input"
@@ -479,6 +479,9 @@ export default function Admin() {
               <li>Permissions → Contents 选 Read and write</li>
               <li>Generate token，复制，粘贴到上面</li>
             </ol>
+            <p className="admin__note">
+              已经有 Classic token（勾了 repo 权限）也可以直接粘贴，不必新建。
+            </p>
           </div>
 
           {toast ? <p className={`toast toast--${toast.kind}`}>{toast.text}</p> : null}
