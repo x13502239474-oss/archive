@@ -139,6 +139,11 @@ button {
   letter-spacing: 0.06em;
 }
 
+.meta--plain {
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+
 .meta--ink {
   color: var(--ink);
 }

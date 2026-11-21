@@ -15,7 +15,7 @@ export default function About() {
     <div className="page about">
       <div className="shell">
         <div className="about-top">
-          <span className="meta">About · 个人档案</span>
+          <span className="meta">个人档案</span>
           <span className="meta">
             {site.volume} · {year}
           </span>
@@ -67,7 +67,7 @@ export default function About() {
         <div className="shell">
           <div className="section-head">
             <h2>关注方向</h2>
-            <span className="meta">Interests &amp; Exploring</span>
+            <span className="meta">关注与探索</span>
           </div>
 
           <div className="about-split">
@@ -100,7 +100,7 @@ export default function About() {
         <div className="shell">
           <div className="section-head">
             <h2>创作理念</h2>
-            <span className="meta">Principles · {site.about.principles.length}</span>
+            <span className="meta">共 {site.about.principles.length} 条</span>
           </div>
 
           <div className="principles">
@@ -119,7 +119,7 @@ export default function About() {
         <div className="shell">
           <div className="section-head">
             <h2>常用工具</h2>
-            <span className="meta">Tools &amp; Stack</span>
+            <span className="meta">工具与技术</span>
           </div>
 
           <div className="tools">

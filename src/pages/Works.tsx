@@ -107,9 +107,9 @@ export default function Works() {
     <div className="page archive">
       <header className="shell arc-head">
         <div className="arc-head__top">
-          <span className="meta">Works &amp; Archive</span>
+          <span className="meta">作品与档案</span>
           <span className="meta">
-            {String(projects.length).padStart(2, '0')} Records ·{' '}
+            {String(projects.length).padStart(2, '0')} 件 ·{' '}
             {Math.min(...archiveYears)}—{Math.max(...archiveYears)}
           </span>
         </div>
@@ -152,14 +152,14 @@ export default function Works() {
               aria-pressed={mode === 'gallery'}
               onClick={() => update('mode', 'gallery')}
             >
-              Gallery
+              画廊
             </button>
             <button
               type="button"
               aria-pressed={mode === 'index'}
               onClick={() => update('mode', 'index')}
             >
-              Index
+              目录
             </button>
           </div>
 
@@ -314,10 +314,7 @@ export default function Works() {
                       {cat.name} · {p.year}
                     </span>
                   </div>
-                  <h2 className="gcard__title">
-                    {p.title}
-                    {p.titleEn ? <em>{p.titleEn}</em> : null}
-                  </h2>
+                  <h2 className="gcard__title">{p.title}</h2>
                   <p className="gcard__summary">{p.summary}</p>
                 </Link>
               );
@@ -347,10 +344,7 @@ export default function Works() {
                     {p.code}
                     {p.featured ? <span className="mark"> 精选</span> : null}
                   </span>
-                  <span className="idx__title">
-                    {p.title}
-                    {p.titleEn ? <em>{p.titleEn}</em> : null}
-                  </span>
+                  <span className="idx__title">{p.title}</span>
                   <span className="idx__cat">{cat.name}</span>
                   <span className="idx__year num">{p.year}</span>
                   <span className="idx__desc">{p.summary}</span>

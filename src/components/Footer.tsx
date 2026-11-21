@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="shell">
         <div className="footer__inner">
           <div className="footer__row">
-            <span className="meta">继续记录中 · Ongoing</span>
+            <span className="meta">继续记录中</span>
             <a className="footer__mail link" href={`mailto:${site.email}`}>
               {site.email}
             </a>
@@ -92,10 +92,10 @@ export default function Footer() {
 
           <div className="footer__bottom">
             <span className="meta">
-              © {year} {site.nameEn}
+              © {year} {site.name}
             </span>
             <span className="meta">
-              {site.archiveTitle} · {site.archiveTitleEn}
+              {site.archiveTitle}
               <Link to="/admin" className="footer__admin">
                 管理
               </Link>

@@ -416,7 +416,7 @@ export default function Admin() {
       <div className="page admin">
         <div className="shell shell--narrow">
           <header className="admin__head">
-            <span className="meta">Admin</span>
+            <span className="meta">管理</span>
             <h1 className="admin__title">连接仓库</h1>
             <p className="admin__lede">
               后台直接往你的 GitHub 仓库写内容，提交后自动上线。令牌只存在这台设备的浏览器里。
@@ -511,14 +511,6 @@ export default function Admin() {
                 value={draft.title}
                 onChange={(e) => setField('title', e.target.value)}
                 placeholder="静读"
-              />
-            </Field>
-            <Field label="英文名" hint="可留空">
-              <input
-                className="input"
-                value={draft.titleEn ?? ''}
-                onChange={(e) => setField('titleEn', e.target.value)}
-                placeholder="STILL READING"
               />
             </Field>
             <div className="admin__row">

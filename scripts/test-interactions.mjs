@@ -18,17 +18,17 @@ page.on('console', (m) => {
 await page.goto(BASE + '/', { waitUntil: 'networkidle' });
 ok('首页标题', (await page.title()).includes('档案馆'), await page.title());
 
-await page.getByRole('link', { name: 'Works', exact: true }).first().click();
+await page.getByRole('link', { name: '作品', exact: true }).first().click();
 await page.waitForURL('**/works');
 ok('导航到 WORKS', page.url().endsWith('/works'));
 
 // 2. 画廊 / 目录切换
-await page.getByRole('button', { name: 'Index' }).click();
+await page.getByRole('button', { name: '目录', exact: true }).click();
 await page.waitForTimeout(200);
 ok('切换到目录模式', page.url().includes('mode=index'));
 ok('目录行存在', (await page.locator('.idx__row').count()) === 8, `${await page.locator('.idx__row').count()} 行`);
 
-await page.getByRole('button', { name: 'Gallery' }).click();
+await page.getByRole('button', { name: '画廊', exact: true }).click();
 await page.waitForTimeout(200);
 ok('切回画廊模式', (await page.locator('.gcard').count()) === 8);
 
@@ -90,7 +90,7 @@ ok('Contact 渲染', (await page.locator('.contact-row').count()) >= 4);
 // 10. 移动端菜单
 const m = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true });
 await m.goto(BASE + '/', { waitUntil: 'networkidle' });
-await m.getByRole('button', { name: /Index/ }).click();
+await m.getByRole('button', { name: /目录/ }).click();
 await m.waitForTimeout(500);
 ok('移动菜单打开', await m.locator('.menu').isVisible());
 ok('菜单项数量', (await m.locator('.menu__link').count()) === 5);

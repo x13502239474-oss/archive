@@ -12,17 +12,12 @@
   border-bottom: 1px solid var(--rule);
 }
 
-.meta--plain {
-  text-transform: none;
-  letter-spacing: 0.04em;
-}
-
 .admin__title {
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(2rem, 6vw, 3.2rem);
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.015em;
   margin-top: 14px;
 }
 

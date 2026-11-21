@@ -4,11 +4,11 @@ import { site } from '../data/content';
 import '../styles/nav.css';
 
 const LINKS = [
-  { key: 'home', label: 'Home', to: '/' },
-  { key: 'works', label: 'Works', to: '/works' },
-  { key: 'archive', label: 'Archive', to: '/works?mode=index' },
-  { key: 'about', label: 'About', to: '/about' },
-  { key: 'contact', label: 'Contact', to: '/contact' },
+  { key: 'home', label: '首页', to: '/' },
+  { key: 'works', label: '作品', to: '/works' },
+  { key: 'archive', label: '档案', to: '/works?mode=index' },
+  { key: 'about', label: '关于', to: '/about' },
+  { key: 'contact', label: '联系', to: '/contact' },
 ];
 
 const Arrow = () => (
@@ -83,7 +83,7 @@ export default function Nav() {
           <Link to="/" className="nav__brand" aria-label={`${site.name} · 返回首页`}>
             <span className="nav__name">{site.name}</span>
             <span className="nav__sep" aria-hidden="true" />
-            <span className="nav__sub">{site.archiveTitleEn}</span>
+            <span className="nav__sub">{site.archiveTitle}</span>
           </Link>
 
           <nav className="nav__links" aria-label="主导航">
@@ -107,7 +107,7 @@ export default function Nav() {
             aria-controls="site-menu"
             onClick={() => setOpen((v) => !v)}
           >
-            <span className="nav__toggle-label">{open ? 'Close' : 'Index'}</span>
+            <span className="nav__toggle-label">{open ? '关闭' : '目录'}</span>
             <span className="nav__glyph" aria-hidden="true">
               <span />
               <span />
@@ -128,7 +128,7 @@ export default function Nav() {
                 toggleRef.current?.focus();
               }}
             >
-              <span>Close</span>
+              <span>关闭</span>
               <span className="nav__glyph" aria-hidden="true">
                 <span />
                 <span />
@@ -146,20 +146,7 @@ export default function Nav() {
                     aria-current={isActive(l.key) ? 'page' : undefined}
                   >
                     <span className="menu__idx">{String(i + 1).padStart(2, '0')}</span>
-                    <span className="menu__label">
-                      {l.label}
-                      <em>
-                        {l.key === 'works'
-                          ? '作品画廊'
-                          : l.key === 'archive'
-                            ? '档案目录'
-                            : l.key === 'about'
-                              ? '关于'
-                              : l.key === 'contact'
-                                ? '联系'
-                                : '首页'}
-                      </em>
-                    </span>
+                    <span className="menu__label">{l.label}</span>
                     <Arrow />
                   </Link>
                 </li>
@@ -167,7 +154,7 @@ export default function Nav() {
             </ul>
 
             <div className="menu__foot">
-              <span className="meta">{site.email}</span>
+              <span className="meta meta--plain">{site.email}</span>
               <span className="meta">
                 {site.volume} · {new Date().getFullYear()}
               </span>

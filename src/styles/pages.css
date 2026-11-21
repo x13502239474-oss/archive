@@ -21,8 +21,8 @@
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(3rem, 11vw, 9rem);
-  line-height: 0.88;
-  letter-spacing: -0.045em;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
   margin-top: 26px;
 }
 
@@ -95,14 +95,6 @@
 
 .about-prose p + p {
   margin-top: 1.1em;
-}
-
-.about-prose p:first-child::first-letter {
-  float: left;
-  font-size: 3.1em;
-  line-height: 0.82;
-  padding: 0.06em 0.1em 0 0;
-  color: var(--brick);
 }
 
 @media (min-width: 900px) {
@@ -300,8 +292,8 @@
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(2.6rem, 9vw, 7rem);
-  line-height: 0.9;
-  letter-spacing: -0.04em;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
   margin-top: 26px;
 }
 

@@ -46,7 +46,7 @@ export default function Home() {
           <div className="hero__rail">
             <span className="meta">{site.archiveTitle}</span>
             <span className="meta">
-              Est. {site.since} · {site.volume}
+              始于 {site.since} · {site.volume}
             </span>
             <span className="meta">{year}</span>
           </div>
@@ -59,9 +59,6 @@ export default function Home() {
                   className={`hero__line ${i === 1 ? 'hero__line--indent' : ''}`}
                 >
                   {line}
-                  {i === site.headline.length - 1 ? (
-                    <span className="hero__dot">.</span>
-                  ) : null}
                 </span>
               ))}
             </h1>
@@ -121,7 +118,7 @@ export default function Home() {
           <div className="section-head" {...reveal()}>
             <h2>精选作品</h2>
             <span className="meta">
-              Selected Works · {String(featuredProjects.length).padStart(2, '0')}
+              共 {String(featuredProjects.length).padStart(2, '0')} 件
             </span>
           </div>
 
@@ -158,10 +155,7 @@ export default function Home() {
                           {cat.name} · {p.year}
                         </span>
                       </div>
-                      <h3 className="work__title">
-                        {p.title}
-                        {p.titleEn ? <em>{p.titleEn}</em> : null}
-                      </h3>
+                      <h3 className="work__title">{p.title}</h3>
                       <p className="work__summary">{p.summary}</p>
                       <span className="work__more">
                         查看档案
@@ -182,7 +176,7 @@ export default function Home() {
           <div className="section-head" {...reveal()}>
             <h2>档案目录</h2>
             <span className="meta">
-              Index by Category · {String(projects.length).padStart(2, '0')} Records
+              按类别 · 共 {String(projects.length).padStart(2, '0')} 件
             </span>
           </div>
 
@@ -196,10 +190,7 @@ export default function Home() {
                 {...reveal(i)}
               >
                 <span className="index-row__num">{c.index}</span>
-                <span className="index-row__name">
-                  {c.name}
-                  <span>{c.nameEn}</span>
-                </span>
+                <span className="index-row__name">{c.name}</span>
                 <span className="index-row__desc">{c.description}</span>
                 <span className="index-row__count">
                   {String(countByCategory(c.id)).padStart(2, '0')} 件
@@ -217,7 +208,7 @@ export default function Home() {
             我不太擅长介绍自己，更习惯用做过的东西来说明。这里的每一件作品，都保留着它被想出来、被放弃、又被重做的那部分。
           </p>
           <div className="statement__side" {...reveal(1)}>
-            <span className="meta">关于 / About</span>
+            <span className="meta">关于</span>
             <Link to="/about" className="statement__link">
               阅读完整自述
               <Arrow size={20} />

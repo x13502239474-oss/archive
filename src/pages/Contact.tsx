@@ -15,7 +15,7 @@ export default function Contact() {
     <div className="page contact">
       <div className="shell">
         <div className="contact-top">
-          <span className="meta">Contact · 联系</span>
+          <span className="meta">联系</span>
           <span className="meta">{year}</span>
         </div>
 

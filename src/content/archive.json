@@ -6,9 +6,9 @@
     "archiveTitle": "个人数字档案馆",
     "archiveTitleEn": "Personal Digital Archive",
     "headline": [
-      "CREATING",
-      "MY OWN",
-      "WORLD"
+      "创造",
+      "我自己的",
+      "世界"
     ],
     "lede": "一个持续探索知识、设计与数字创造的独立创作者。这里保存着每一个作品的来由、方法与留下的痕迹。",
     "since": 2022,
@@ -477,8 +477,7 @@
           "motif": "bars",
           "tone": "navy",
           "density": 28
-        },
-        "src": "//images/echo/cover.jpg"
+        }
       },
       "gallery": [
         {

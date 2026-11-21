@@ -101,10 +101,7 @@ export default function ProjectDetail() {
 
         <header className="proj-head">
           <div className="proj-head__main">
-            <h1 className="proj-title">
-              {p.title}
-              {p.titleEn ? <em>{p.titleEn}</em> : null}
-            </h1>
+            <h1 className="proj-title">{p.title}</h1>
             <p className="proj-lead">{p.description}</p>
           </div>
 
@@ -158,7 +155,7 @@ export default function ProjectDetail() {
 
         <div className="proj-body">
           <nav className="proj-toc" aria-label="本页目录">
-            <span className="proj-toc__label meta">目录 / Contents</span>
+            <span className="proj-toc__label meta">目录</span>
             <ol>
               {SECTIONS.map((s) => (
                 <li key={s.id}>
@@ -217,7 +214,7 @@ export default function ProjectDetail() {
                 <span className="psec__num">04</span>
                 <h2>图版</h2>
                 <span className="meta pgal-sec__count">
-                  Plates · {String(p.gallery.length).padStart(2, '0')}
+                  共 {String(p.gallery.length).padStart(2, '0')} 张
                 </span>
               </div>
 
@@ -333,7 +330,7 @@ export default function ProjectDetail() {
           <div className="section-head">
             <h2>相关档案</h2>
             <span className="meta">
-              Related Records · {String(related.length).padStart(2, '0')}
+              共 {String(related.length).padStart(2, '0')} 件
             </span>
           </div>
           <div className="related__grid">

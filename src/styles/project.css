@@ -52,7 +52,7 @@
   font-weight: 400;
   font-size: clamp(2.9rem, 8.2vw, 6.2rem);
   line-height: 0.94;
-  letter-spacing: -0.038em;
+  letter-spacing: -0.015em;
 }
 
 .proj-title em {
