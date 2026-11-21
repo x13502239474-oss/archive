@@ -1,0 +1,179 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "个人数字档案馆 · 内容文件",
+  "description": "这个文件是站点的全部内容。改完运行 npm run check 校验。",
+  "type": "object",
+  "required": ["site", "categories", "projects"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "site": { "$ref": "#/definitions/site" },
+    "categories": {
+      "type": "array",
+      "description": "作品分类，可自由增减",
+      "items": { "$ref": "#/definitions/category" }
+    },
+    "projects": {
+      "type": "array",
+      "description": "作品档案，顺序由 order 决定",
+      "items": { "$ref": "#/definitions/project" }
+    }
+  },
+  "definitions": {
+    "site": {
+      "type": "object",
+      "required": ["name", "nameEn", "archiveTitle", "archiveTitleEn", "headline", "lede", "since", "volume", "email", "links", "about"],
+      "properties": {
+        "name": { "type": "string", "description": "你的名字或品牌名，显示在导航、页脚、关于页" },
+        "nameEn": { "type": "string", "description": "英文名，显示在页脚版权行" },
+        "archiveTitle": { "type": "string", "description": "档案卷名，如「个人数字档案馆」" },
+        "archiveTitleEn": { "type": "string", "description": "档案卷名英文，显示在导航副标题" },
+        "headline": {
+          "type": "array",
+          "description": "首屏大标题，每个字符串一行（建议 2–3 行，每行不超过 8 个字符）",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "maxItems": 4
+        },
+        "lede": { "type": "string", "description": "首屏简介，一两句话" },
+        "since": { "type": "number", "description": "档案起始年份" },
+        "volume": { "type": "string", "description": "卷次，如「卷 I」" },
+        "location": { "type": "string", "description": "所在地，留空显示「待补充」" },
+        "now": { "type": "string", "description": "正在做的事，显示在关于页侧栏" },
+        "email": { "type": "string", "description": "联系邮箱" },
+        "links": {
+          "type": "array",
+          "description": "其他渠道。value 留空会显示为「待补充」，不会编造",
+          "items": {
+            "type": "object",
+            "required": ["label", "value"],
+            "properties": {
+              "label": { "type": "string", "description": "渠道名，如 GitHub" },
+              "value": { "type": "string", "description": "显示的文字，留空表示尚未提供" },
+              "href": { "type": "string", "description": "链接地址，没有就不填" },
+              "note": { "type": "string", "description": "待补充时的说明" }
+            }
+          }
+        },
+        "about": {
+          "type": "object",
+          "required": ["intro", "paragraphs", "interests", "principles", "exploring", "tools"],
+          "properties": {
+            "intro": { "type": "string", "description": "关于页开头的一段话" },
+            "paragraphs": { "type": "array", "items": { "type": "string" }, "description": "关于页正文，每个字符串一段" },
+            "interests": { "type": "array", "items": { "type": "string" }, "description": "关注方向" },
+            "principles": {
+              "type": "array",
+              "description": "创作理念",
+              "items": {
+                "type": "object",
+                "required": ["title", "body"],
+                "properties": {
+                  "title": { "type": "string" },
+                  "body": { "type": "string" }
+                }
+              }
+            },
+            "exploring": { "type": "array", "items": { "type": "string" }, "description": "正在探索的方向" },
+            "tools": {
+              "type": "array",
+              "description": "常用工具，按组列出",
+              "items": {
+                "type": "object",
+                "required": ["group", "items"],
+                "properties": {
+                  "group": { "type": "string", "description": "组名，如「设计」" },
+                  "items": { "type": "array", "items": { "type": "string" } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "category": {
+      "type": "object",
+      "required": ["index", "id", "name", "nameEn", "description"],
+      "properties": {
+        "index": { "type": "string", "description": "显示用编号，如 01" },
+        "id": { "type": "string", "description": "唯一标识，作品的 category 填这个" },
+        "name": { "type": "string", "description": "中文名称" },
+        "nameEn": { "type": "string", "description": "英文名称" },
+        "description": { "type": "string", "description": "一句话说明" }
+      }
+    },
+    "image": {
+      "type": "object",
+      "required": ["id", "alt", "ratio"],
+      "properties": {
+        "id": { "type": "string", "description": "唯一标识" },
+        "src": { "type": "string", "description": "真实图片路径，如 /images/xxx/01.jpg（放在 public 下）" },
+        "alt": { "type": "string", "description": "无障碍描述，必填" },
+        "caption": { "type": "string", "description": "图注文字" },
+        "ratio": {
+          "type": "string",
+          "enum": ["portrait", "landscape", "square", "wide", "tall"],
+          "description": "portrait 4:5 / landscape 3:2 / square 1:1 / wide 16:9 / tall 2:3"
+        },
+        "plate": {
+          "type": "object",
+          "description": "没有真实图片时用来生成图版",
+          "required": ["motif", "tone"],
+          "properties": {
+            "motif": {
+              "type": "string",
+              "enum": ["grid", "arcs", "lines", "letter", "bars", "orbit", "stack"],
+              "description": "图版母题"
+            },
+            "tone": {
+              "type": "string",
+              "enum": ["paper", "ink", "brick", "navy", "olive"],
+              "description": "图版色调"
+            },
+            "density": { "type": "number", "description": "母题疏密，可省略" }
+          }
+        }
+      }
+    },
+    "project": {
+      "type": "object",
+      "required": ["id", "code", "title", "category", "year", "order", "featured", "summary", "description", "cover", "gallery", "tags", "background", "designConcept", "features", "process", "technology"],
+      "properties": {
+        "id": { "type": "string", "description": "URL 标识，小写连字符，必须唯一" },
+        "code": { "type": "string", "description": "档案编号，如 DP·2024·01" },
+        "title": { "type": "string", "description": "作品名" },
+        "titleEn": { "type": "string", "description": "英文副题，可省略" },
+        "category": { "type": "string", "description": "必须是 categories 里某个 id" },
+        "year": { "type": "number", "description": "创作年份" },
+        "month": { "type": "number", "description": "完成月份 1–12，可省略" },
+        "order": { "type": "number", "description": "排序权重，越大越靠前" },
+        "featured": { "type": "boolean", "description": "是否进入首页精选（最多取前 4 件）" },
+        "summary": { "type": "string", "description": "一句话简介，出现在列表" },
+        "description": { "type": "string", "description": "两三句简介，出现在详情页标题下" },
+        "cover": { "$ref": "#/definitions/image" },
+        "gallery": { "type": "array", "items": { "$ref": "#/definitions/image" } },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "projectUrl": { "type": "string", "description": "在线访问地址，留空则显示「暂未公开」" },
+        "background": { "type": "string", "description": "创作背景与目的" },
+        "designConcept": { "type": "string", "description": "核心设计理念" },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["title", "body"],
+            "properties": { "title": { "type": "string" }, "body": { "type": "string" } }
+          }
+        },
+        "process": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["title", "body"],
+            "properties": { "title": { "type": "string" }, "body": { "type": "string" } }
+          }
+        },
+        "technology": { "type": "array", "items": { "type": "string" } },
+        "content": { "type": "string", "description": "补充段落，可省略" }
+      }
+    }
+  }
+}

@@ -3,9 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import Plate from '../components/Plate';
 import Arrow from '../components/Arrow';
 import Lightbox from '../components/Lightbox';
-import { getCategory } from '../data/categories';
-import { getProject, sortedProjects } from '../data/projects';
-import { site } from '../data/site';
+import { getCategory, getProject, sortedProjects, site } from '../data/content';
 import { usePageMeta } from '../hooks/useSite';
 import '../styles/project.css';
 

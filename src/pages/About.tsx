@@ -1,6 +1,5 @@
 import type { CSSProperties } from 'react';
-import { site } from '../data/site';
-import { projects } from '../data/projects';
+import { site, projects } from '../data/content';
 import { usePageMeta } from '../hooks/useSite';
 import '../styles/pages.css';
 

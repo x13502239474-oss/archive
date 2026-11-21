@@ -1,4 +1,4 @@
-import { site } from '../data/site';
+import { site } from '../data/content';
 import Arrow from '../components/Arrow';
 import { usePageMeta } from '../hooks/useSite';
 import '../styles/pages.css';

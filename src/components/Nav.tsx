@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { site } from '../data/site';
+import { site } from '../data/content';
 import '../styles/nav.css';
 
 const LINKS = [

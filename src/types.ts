@@ -104,3 +104,39 @@ export interface SiteLink {
   href?: string;
   note?: string;
 }
+
+export interface AboutContent {
+  /** 关于页开头的一段话 */
+  intro: string;
+  /** 关于页正文，每个字符串一段 */
+  paragraphs: string[];
+  interests: string[];
+  principles: { title: string; body: string }[];
+  exploring: string[];
+  tools: { group: string; items: string[] }[];
+}
+
+export interface SiteContent {
+  name: string;
+  nameEn: string;
+  archiveTitle: string;
+  archiveTitleEn: string;
+  /** 首屏大标题，每个字符串一行 */
+  headline: string[];
+  lede: string;
+  since: number;
+  volume: string;
+  /** 所在地，留空则显示“待补充” */
+  location: string;
+  now: string;
+  email: string;
+  links: SiteLink[];
+  about: AboutContent;
+}
+
+/** src/content/archive.json 的完整结构 */
+export interface ArchiveContent {
+  site: SiteContent;
+  categories: Category[];
+  projects: Project[];
+}

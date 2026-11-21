@@ -2,9 +2,14 @@ import type { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import Plate from '../components/Plate';
 import Arrow from '../components/Arrow';
-import { site } from '../data/site';
-import { categories, getCategory } from '../data/categories';
-import { featuredProjects, projects, countByCategory } from '../data/projects';
+import {
+  site,
+  categories,
+  getCategory,
+  featuredProjects,
+  projects,
+  countByCategory,
+} from '../data/content';
 import { usePageMeta } from '../hooks/useSite';
 import '../styles/home.css';
 

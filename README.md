@@ -1,154 +1,191 @@
-# 个人数字档案馆 · Personal Digital Archive
+# 个人数字档案馆 · 模板
 
 一个以「数字年鉴」为概念的长期个人作品档案站。瑞士编辑设计 × 纸本文艺 × 档案馆秩序。
 
-React + TypeScript + Vite，无后端，作品数据集中在 `src/data/` 内，新增作品不需要改动任何页面代码。
+**这是一个模板**：任何人都能把它变成自己的档案馆，只需要改一个文件，不用写代码。
 
-**线上地址**：https://x13502239474-oss.github.io/archive/
-
-推送到 `main` 分支后由 GitHub Actions 自动构建并发布到 GitHub Pages。
+演示站：https://x13502239474-oss.github.io/archive/
 
 ---
 
-## 快速开始
+## 三步上线
+
+### 1. 复制仓库
+
+点本页右上角的 **Use this template → Create a new repository**，起一个名字（比如 `archive`），选 Public。
+
+> 用 Public 才能免费开 GitHub Pages。想私有仓库 + Pages，需要 GitHub Pro。
+
+### 2. 改内容
+
+打开 **`src/content/archive.json`**，把里面的内容换成你自己的。
+
+这是**唯一**需要改的文件：姓名、简介、联系方式、分类、作品、关于页，全在里面。改完在本地跑一次：
 
 ```bash
 npm install
-npm run dev      # 本地开发 http://localhost:5173
-npm run build    # 生产构建，输出 dist/
-npm run preview  # 预览构建结果 http://localhost:4173
-npm test         # 交互自测（导航 / 筛选 / 搜索 / 灯箱 / 移动菜单 / 溢出）
+npm run check     # 只校验内容，不启动服务器
 ```
+
+如果哪里写错了，它会直接告诉你第几个作品的哪个字段有问题，比如：
+
+```
+✗ 发现 2 处问题：
+
+  · projects[2]（回声）.category — 找不到这个分类：experiments-2
+  · projects[3].cover.alt — 必须填写（无障碍描述）
+```
+
+### 3. 打开 Pages
+
+仓库 **Settings → Pages → Source** 选 **GitHub Actions**。
+
+之后每次 push 到 `main`，都会自动构建并发布。地址是：
+
+```
+https://<你的用户名>.github.io/<仓库名>/
+```
+
+子路径、路由、深链接都已经处理好了，仓库叫什么都行。
 
 ---
 
-## 目录结构
+## 内容字段
 
-```
-src/
-├─ data/
-│  ├─ site.ts        站点身份：姓名、简介、联系方式、关于页正文
-│  ├─ categories.ts  作品分类（可自由增加）
-│  └─ projects.ts    ★ 作品档案，所有内容都在这里
-├─ types.ts          数据结构定义
-├─ pages/            Home / Works / ProjectDetail / About / Contact
-├─ components/       Nav、Footer、Plate（图版）、Lightbox、Arrow
-├─ hooks/useSite.ts  滚动显现、路由滚动复位、页面标题
-└─ styles/           设计令牌与各页面样式
-```
+`archive.json` 有三个顶层字段：
 
----
+| 字段 | 内容 |
+| --- | --- |
+| `site` | 你的身份、首屏标题、联系方式、关于页正文 |
+| `categories` | 作品分类，可以自由增减 |
+| `projects` | 作品档案，一件作品一个对象 |
 
-## 添加一件作品
+文件开头有 `"$schema": "./archive.schema.json"`，用 VS Code 打开会有字段提示和自动补全。
 
-打开 `src/data/projects.ts`，在数组末尾追加一个对象即可。**不需要修改任何组件。**
+### 一件作品的最小结构
 
-```ts
+```json
 {
-  id: 'my-new-work',          // URL 标识，小写连字符，必须唯一
-  code: 'DP·2026·09',         // 档案编号：分类缩写·年份·序号
-  title: '作品名',
-  titleEn: 'MY NEW WORK',     // 可留空
-  category: 'digital-products',
-  year: 2026,
-  month: 3,                   // 可选，用于精确排序
-  order: 90,                  // 越大越靠前（默认排序依据）
-  featured: true,             // 是否进入首页精选
-  summary: '一句话简介，出现在列表里。',
-  description: '两三句的项目简介，出现在详情页标题下。',
-  cover: { ... },             // 封面
-  gallery: [ ... ],           // 详情页图版
-  tags: ['工具', '排版'],
-  projectUrl: 'https://...',  // 留空则显示“暂未公开”
-  background: '创作背景与目的……',
-  designConcept: '核心设计理念……',
-  features: [{ title: '功能标题', body: '说明' }],
-  process:  [{ title: '阶段标题', body: '说明' }],
-  technology: ['React', 'TypeScript'],
-  content: '可选的补记段落。',
+  "id": "my-work",
+  "code": "DP·2026·01",
+  "title": "作品名",
+  "titleEn": "MY WORK",
+  "category": "digital-products",
+  "year": 2026,
+  "order": 90,
+  "featured": true,
+  "summary": "一句话简介，出现在列表里。",
+  "description": "两三句简介，出现在详情页标题下。",
+  "cover": { "id": "c1", "alt": "封面描述", "ratio": "portrait",
+             "plate": { "motif": "stack", "tone": "paper" } },
+  "gallery": [],
+  "tags": ["工具"],
+  "background": "为什么做它。",
+  "designConcept": "设计上的核心决定。",
+  "features": [{ "title": "功能标题", "body": "说明" }],
+  "process": [{ "title": "阶段标题", "body": "说明" }],
+  "technology": ["React"]
 }
 ```
 
-### 字段说明
+- `id` 会变成地址 `/works/my-work`，改了就换了链接
+- `order` 越大越靠前；`featured: true` 进首页精选（最多取 4 件）
+- `category` 必须是 `categories` 里某个 `id`
+- `projectUrl` 留空时，详情页显示「暂未公开」，不会编造
 
-| 字段 | 说明 |
-| --- | --- |
-| `id` | 详情页地址 `/works/<id>`，改了就换了链接 |
-| `code` | 档案编号，显示在卡片与详情页；建议 `分类缩写·年份·序号` |
-| `category` | 必须是 `categories.ts` 里已有的 `id` |
-| `order` | 手动排序权重，数字越大越靠前 |
-| `featured` | 首页「精选作品」最多展示 4 件，按 order 取前 4 |
-| `cover` / `gallery` | 见下方「图片」 |
-| `projectUrl` | 有值时详情页出现「在线访问」按钮 |
+### 加一个分类
+
+在 `categories` 数组里追加：
+
+```json
+{ "index": "05", "id": "writings", "name": "文字",
+  "nameEn": "Writings", "description": "长文、随笔与翻译。" }
+```
+
+筛选区、首页目录、关于页会自动出现，作品数量自动统计。
 
 ---
 
 ## 图片
 
-每张图片有两种来源，**填了 `src` 就用真实图片，没填就用图版**：
+每张图有两种来源，**填了 `src` 就用真实图片，没填就用生成的图版**：
 
-```ts
-// 1) 真实截图：把文件放进 public/images/<作品id>/，src 写绝对路径
-{ id: 'sr-1', src: '/images/still-reading/01.jpg', alt: '书架视图',
-  caption: '图注文字', ratio: 'landscape' }
+```json
+// 真实截图：文件放进 public/images/<作品id>/，路径以 / 开头
+{ "id": "g1", "src": "/images/my-work/01.jpg", "alt": "界面截图",
+  "caption": "图注", "ratio": "landscape" }
 
-// 2) 生成的图版：没有真实图片时的占位
-{ id: 'sr-1', alt: '书架视图', caption: '图注文字', ratio: 'landscape',
-  plate: { motif: 'stack', tone: 'paper', density: 7 } }
+// 生成的图版：没有截图时的占位
+{ "id": "g1", "alt": "界面截图", "caption": "图注", "ratio": "landscape",
+  "plate": { "motif": "grid", "tone": "brick" } }
 ```
 
 - `ratio`：`portrait` 4:5 / `landscape` 3:2 / `square` 1:1 / `wide` 16:9 / `tall` 2:3
 - `motif`：`stack` `lines` `grid` `arcs` `letter` `bars` `orbit`
 - `tone`：`paper` `ink` `brick` `navy` `olive`
-- `density`：母题的疏密（可选）
 
-图版不是「假截图」，而是用排版语言为每件作品绘制的封面系统。真实截图到位后逐一替换 `src` 即可，布局不用动。
+图版不是假截图，是用排版语言画的封面系统——在真实截图出现之前，它比灰色占位块体面得多。有图之后逐个填 `src` 替换即可，布局不用动。
 
 ---
 
-## 添加分类
+## 本地开发
 
-在 `src/data/categories.ts` 追加一项，筛选区、首页目录、关于页会自动出现：
-
-```ts
-{ index: '05', id: 'writings', name: '文字', nameEn: 'Writings',
-  description: '长文、随笔与翻译。' }
+```bash
+npm install
+npm run dev       # http://localhost:5173
+npm run check     # 校验 archive.json
+npm run build     # 生产构建
+npm run preview   # 预览构建结果
+npm test          # 交互自测（需要先 npm run preview）
 ```
 
-`index` 只是显示用的两位数编号。作品数量由 `projects.ts` 自动统计。
+---
+
+## 换成自己的视觉
+
+- **配色 / 字体 / 间距**：`src/styles/tokens.css`，改里面的变量即可整体换掉
+- **首屏标题**：`site.headline`，数组每一项是一行
+- **图版配色**：`src/components/Plate.tsx` 顶部的 `TONES`
+
+默认是暖纸白 + 近黑 + 砖红，Newsreader（衬线）+ Archivo（无衬线）。想换成冷色或深色，只改 tokens 里的色值，组件不用动。
 
 ---
 
-## 修改个人信息
+## 部署到别处
 
-`src/data/site.ts`：
+`npm run build` 后把 `dist/` 传上去即可。站点用 history 路由，需要 SPA 回退：
 
-- `name` / `nameEn` / `archiveTitle`：姓名与档案卷名
-- `headline`：首屏大标题，数组每项一行
-- `lede`：首屏简介
-- `email` / `links`：联系方式。**留空（`''`）的渠道会显示为「待补充」，不会编造。**
-- `about`：关于页的简介、段落、兴趣、理念、工具、正在探索
-
----
-
-## 部署
-
-已配置 GitHub Actions（`.github/workflows/deploy.yml`）：推送到 `main` 即自动构建并发布到 GitHub Pages，构建时注入 `VITE_BASE=/archive/`，路由 basename 自动跟随。
-
-本地手动部署到其他静态托管：`npm run build` 后上传 `dist/`，并配置 SPA 回退：
-
-- Netlify / Cloudflare Pages：`public/_redirects` 已包含 `/* /index.html 200`
-- Vercel：`vercel.json` 已包含 rewrite 规则
+- Netlify / Cloudflare Pages：`public/_redirects` 已含 `/* /index.html 200`
+- Vercel：`vercel.json` 已含 rewrite
 - Nginx：`try_files $uri $uri/ /index.html;`
 
 ---
 
-## 设计约定
+## 结构
 
-- **色板**：`#f4f0e6` 纸 / `#17160f` 墨 / `#9b3c2c` 砖红 / `#20364c` 深蓝 / `#4c5340` 暗橄榄
-- **字体**：Newsreader（标题与长文）+ Archivo（标签、导航、数据）
-- **网格**：12 栏，左右外边距 20 / 40 / 56 / 72px 随断点递增
-- **圆角**：全站 0；不使用阴影、渐变、玻璃拟态
-- **分隔**：只使用 1px 细线，颜色 `rgba(23,22,15,.16)`
+```
+src/
+├─ content/
+│  ├─ archive.json        ★ 全部内容
+│  ├─ archive.schema.json   字段定义（编辑器提示用）
+│  └─ validate.mjs          内容校验
+├─ data/content.ts       读入 + 校验 + 派生数据
+├─ pages/                Home / Works / ProjectDetail / About / Contact
+├─ components/           Nav、Footer、Plate（图版）、Lightbox、Arrow
+├─ hooks/useSite.ts      滚动显现、路由滚动复位、页面标题
+└─ styles/               设计令牌与各页面样式
+```
 
-样式令牌集中在 `src/styles/tokens.css`，改这里即可整体换色换字。
+页面组件不直接读 JSON，只从 `data/content.ts` 取数据；所以内容怎么改都不会影响布局。
+
+---
+
+## 设计说明
+
+- 一个地面（纸）、一个墨色、三个低饱和强调色
+- 12 栏网格，外边距 20 / 40 / 56 / 72px 随断点递增
+- 全站 0 圆角、无阴影、无渐变；只用 1px 细线分隔
+- 标题与长文用衬线，编号、导航、数据用无衬线
+- 移动优先：390 / 768 / 1440 三个宽度都单独调过版面
+
+字体通过 Google Fonts 加载，国内访问慢的话可以把字体文件放进 `public/fonts/` 自托管，改 `tokens.css` 里的 `--font-display` / `--font-sans`。

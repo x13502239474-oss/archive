@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import { site } from '../data/site';
-import { projects } from '../data/projects';
+import { site, projects } from '../data/content';
 import '../styles/footer.css';
 
 export default function Footer() {
