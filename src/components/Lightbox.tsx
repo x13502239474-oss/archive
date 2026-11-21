@@ -88,7 +88,6 @@ export default function Lightbox({ images, startIndex, onClose }: Props) {
             alt={image.alt}
             ratio={image.ratio}
             seed={image.id}
-            label={image.id}
             eager
           />
           <figcaption className="lb__caption">{image.caption}</figcaption>

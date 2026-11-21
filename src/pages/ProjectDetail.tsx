@@ -233,7 +233,6 @@ export default function ProjectDetail() {
                         alt={img.alt}
                         ratio={img.ratio}
                         seed={img.id}
-                        label={img.id}
                       />
                     </button>
                     <figcaption className="pgal__cap">
