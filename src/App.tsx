@@ -8,6 +8,7 @@ import Works from './pages/Works';
 import ProjectDetail from './pages/ProjectDetail';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Admin from './pages/Admin';
 import { usePageMeta, useRevealOnScroll, useScrollReset } from './hooks/useSite';
 
 function NotFound() {
@@ -56,6 +57,7 @@ export default function App() {
             <Route path="/works/:id" element={<ProjectDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

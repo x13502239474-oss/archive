@@ -96,6 +96,9 @@ export default function Footer() {
             </span>
             <span className="meta">
               {site.archiveTitle} · {site.archiveTitleEn}
+              <Link to="/admin" className="footer__admin">
+                管理
+              </Link>
             </span>
           </div>
         </div>

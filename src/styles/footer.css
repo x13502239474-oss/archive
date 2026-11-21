@@ -93,6 +93,18 @@
   color: var(--ink-3);
 }
 
+.footer__admin {
+  margin-left: 14px;
+  padding-left: 14px;
+  border-left: 1px solid var(--rule);
+  color: var(--ink-2);
+  transition: color 0.3s var(--ease);
+}
+
+.footer__admin:hover {
+  color: var(--brick);
+}
+
 @media (min-width: 760px) {
   .footer__cols {
     grid-template-columns: repeat(4, minmax(0, 1fr));
