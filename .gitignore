@@ -1,0 +1,8 @@
+node_modules
+dist
+.taste-skill
+shots
+.workbuddy-ai
+*.local
+.DS_Store
+*.tsbuildinfo

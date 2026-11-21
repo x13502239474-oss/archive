@@ -1,0 +1,417 @@
+/* ===========================================================================
+   关于 / 联系
+   =========================================================================== */
+
+/* 关于 ------------------------------------------------------------------- */
+.about {
+  padding-top: 22px;
+}
+
+.about-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.about-name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3rem, 11vw, 9rem);
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  margin-top: 26px;
+}
+
+.about-lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.1vw, 1.6rem);
+  line-height: 1.5;
+  letter-spacing: -0.012em;
+  max-width: 30em;
+  margin-top: 28px;
+  color: var(--ink);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  margin-top: 48px;
+}
+
+.about-facts {
+  min-width: 0;
+}
+
+.about-facts dl {
+  border-top: 1px solid var(--ink);
+}
+
+.about-facts .fact {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.8125rem;
+}
+
+.about-facts dt {
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.about-facts dd {
+  text-align: right;
+}
+
+.about-now {
+  margin-top: 26px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+}
+
+.about-now p {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin-top: 8px;
+}
+
+.about-prose p {
+  font-family: var(--font-display);
+  font-size: var(--t-prose);
+  line-height: 1.72;
+  max-width: 33em;
+}
+
+.about-prose p + p {
+  margin-top: 1.1em;
+}
+
+.about-prose p:first-child::first-letter {
+  float: left;
+  font-size: 3.1em;
+  line-height: 0.82;
+  padding: 0.06em 0.1em 0 0;
+  color: var(--brick);
+}
+
+@media (min-width: 900px) {
+  .about-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    margin-top: 64px;
+  }
+
+  .about-facts {
+    grid-column: 1 / 4;
+    position: sticky;
+    top: calc(var(--nav-h) + 26px);
+    align-self: start;
+  }
+
+  .about-prose {
+    grid-column: 5 / 11;
+  }
+}
+
+/* 关注方向 + 正在探索 ---------------------------------------------------- */
+.about-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+.interests {
+  border-top: 1px solid var(--rule);
+}
+
+.interests li {
+  border-bottom: 1px solid var(--rule);
+}
+
+.interests li span {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 14px 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  transition: color 0.3s var(--ease), padding-left 0.35s var(--ease);
+}
+
+.interests li span:hover {
+  color: var(--brick);
+  padding-left: 6px;
+}
+
+.interests li em {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: 0.8125rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+  flex: none;
+}
+
+.exploring {
+  border-top: 1px solid var(--ink);
+  padding-top: 14px;
+}
+
+.exploring li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.exploring li:last-child {
+  border-bottom: 0;
+}
+
+@media (min-width: 900px) {
+  .about-split {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+  }
+
+  .about-split__main {
+    grid-column: 1 / 8;
+  }
+
+  .about-split__side {
+    grid-column: 9 / 13;
+  }
+}
+
+/* 创作理念 --------------------------------------------------------------- */
+.principles {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.principle {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 2px 14px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.principle__num {
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  color: var(--brick);
+  font-variant-numeric: tabular-nums;
+  padding-top: 5px;
+}
+
+.principle h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.25rem;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+
+.principle p {
+  grid-column: 2;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin-top: 6px;
+  max-width: 36em;
+}
+
+@media (min-width: 760px) {
+  .principles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 48px;
+  }
+
+  .principle:nth-child(1),
+  .principle:nth-child(2) {
+    border-top: 0;
+  }
+}
+
+/* 工具 ------------------------------------------------------------------- */
+.tools {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 24px;
+}
+
+.tool-group h3 {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 12px;
+}
+
+.tool-group li {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+@media (min-width: 860px) {
+  .tools {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 32px;
+  }
+}
+
+/* 联系 ------------------------------------------------------------------- */
+.contact {
+  padding-top: 22px;
+}
+
+.contact-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.contact-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 9vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  margin-top: 26px;
+}
+
+.contact-lede {
+  font-family: var(--font-display);
+  font-size: var(--t-lead);
+  line-height: 1.55;
+  max-width: 28em;
+  margin-top: 22px;
+  color: var(--ink-2);
+}
+
+.contact-mail {
+  display: inline-block;
+  margin-top: 44px;
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 5.4vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 8px;
+  transition: color 0.35s var(--ease), border-color 0.35s var(--ease);
+  word-break: break-word;
+}
+
+.contact-mail:hover {
+  color: var(--brick);
+  border-color: var(--brick);
+}
+
+.contact-links {
+  margin-top: 56px;
+  border-top: 1px solid var(--ink);
+}
+
+.contact-row {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr) 22px;
+  align-items: baseline;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+  transition: background-color 0.35s var(--ease), padding-left 0.35s var(--ease);
+}
+
+.contact-row__label {
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.contact-row__value {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+
+.contact-row__arrow {
+  justify-self: end;
+  color: var(--ink-3);
+  transition: transform 0.4s var(--ease), color 0.3s var(--ease);
+}
+
+a.contact-row:hover {
+  background: var(--paper-2);
+  padding-left: 10px;
+}
+
+a.contact-row:hover .contact-row__arrow {
+  color: var(--brick);
+  transform: translateX(4px);
+}
+
+.contact-row--pending .contact-row__value {
+  color: var(--ink-3);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+}
+
+.contact-note {
+  display: grid;
+  gap: 12px;
+  margin-top: 40px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+}
+
+.contact-note p {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  max-width: 30em;
+  color: var(--ink-2);
+}
+
+@media (min-width: 900px) {
+  .contact-row {
+    grid-template-columns: 140px minmax(0, 1fr) 24px;
+    gap: 24px;
+    padding: 20px 0;
+  }
+
+  .contact-row__value {
+    font-size: 1.3rem;
+  }
+
+  .contact-links {
+    margin-top: 72px;
+  }
+}

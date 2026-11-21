@@ -1,0 +1,143 @@
+/* ===========================================================================
+   图片放大
+   =========================================================================== */
+
+.lb {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  flex-direction: column;
+  animation: lb-in 0.35s var(--ease) both;
+}
+
+@keyframes lb-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lb__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px var(--margin);
+  flex: none;
+}
+
+.lb__count {
+  font-size: 0.8125rem;
+  letter-spacing: 0.14em;
+  color: rgba(244, 240, 230, 0.62);
+}
+
+.lb__close {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  color: var(--paper);
+}
+
+.lb__close span {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.lb__stage {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 4px;
+  padding: 0 var(--margin) 24px;
+}
+
+.lb__figure {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: lb-fig 0.45s var(--ease) both;
+}
+
+@keyframes lb-fig {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.lb__figure .plate {
+  width: auto;
+  height: min(68vh, 72vw);
+  max-width: 100%;
+}
+
+.lb__caption {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: rgba(244, 240, 230, 0.78);
+  max-width: 46ch;
+  text-align: center;
+  padding-inline: 8px;
+}
+
+.lb__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--paper);
+  opacity: 0.55;
+  transition: opacity 0.3s var(--ease), transform 0.4s var(--ease);
+}
+
+.lb__nav:hover {
+  opacity: 1;
+}
+
+.lb__nav--prev:hover {
+  transform: translateX(-3px);
+}
+
+.lb__nav--next:hover {
+  transform: translateX(3px);
+}
+
+@media (max-width: 700px) {
+  .lb__stage {
+    grid-template-columns: 1fr;
+    padding-bottom: 8px;
+  }
+
+  .lb__nav {
+    display: none;
+  }
+
+  .lb__figure .plate {
+    height: auto;
+    width: 100%;
+    max-height: 62vh;
+  }
+
+  .lb__caption {
+    font-size: 0.875rem;
+    padding-inline: var(--margin);
+  }
+}

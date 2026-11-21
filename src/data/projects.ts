@@ -1,0 +1,674 @@
+import type { Project } from '../types';
+
+/**
+ * 作品档案
+ * ---------------------------------------------------------------------------
+ * 新增作品：把下面任意一个对象复制一份，改掉 id / code / 内容即可。
+ * 排序：order 数字越大越靠前（默认顺序）；首页精选由 featured 控制。
+ * 图片：cover / gallery 里的 src 留空时，会用 plate 生成一枚图版作为占位。
+ *       有真实截图后，把图片放进 public/images/，填 src 即可自动替换。
+ */
+export const projects: Project[] = [
+  {
+    id: 'still-reading',
+    code: 'DP·2024·01',
+    title: '静读',
+    titleEn: 'STILL READING',
+    category: 'digital-products',
+    year: 2024,
+    month: 11,
+    order: 100,
+    featured: true,
+    summary: '一个不催促你的阅读记录工具，只负责把读过的书安静地留在架子上。',
+    description:
+      '记录阅读的最小工具。没有打卡、没有排行榜、没有年度目标，只有书、页码，和读完之后愿意留下的那一句话。',
+    cover: {
+      id: 'still-reading-cover',
+      caption: '',
+      alt: '静读的封面图版：以深浅不一的横条模拟书架上的书脊。',
+      ratio: 'portrait',
+      plate: { motif: 'stack', tone: 'paper', density: 7 },
+    },
+    gallery: [
+      {
+        id: 'sr-1',
+        caption: '书架视图。按年份分组，书脊的深浅对应当年的阅读密度，而不是评分。',
+        alt: '书架视图的排版结构图版。',
+        ratio: 'landscape',
+        plate: { motif: 'stack', tone: 'ink', density: 9 },
+      },
+      {
+        id: 'sr-2',
+        caption: '书籍详情。左侧留白用于放置一句摘录，右侧只有页码与时间。',
+        alt: '书籍详情页的排版结构图版。',
+        ratio: 'portrait',
+        plate: { motif: 'lines', tone: 'paper', density: 5 },
+      },
+      {
+        id: 'sr-3',
+        caption: '年度回顾。只统计读了多少页，不计算“完成率”。',
+        alt: '年度回顾的柱状图版。',
+        ratio: 'wide',
+        plate: { motif: 'bars', tone: 'paper', density: 12 },
+      },
+    ],
+    tags: ['阅读', '工具', '极简'],
+    projectUrl: '',
+    background:
+      '我用过很多阅读管理工具，最后都停在了同一个问题上：它们把阅读变成了一项需要完成的任务。进度条、连续天数、年度目标，每一样都在提醒我读得太慢。我想做一个反过来的东西——它只负责记住，不负责评价。',
+    designConcept:
+      '界面借用图书馆索书条的语言：等宽的数字、细分隔线、按年份排布的书脊。全站只有两种颜色，一种是纸，一种是墨，唯一的强调色留给“正在读”的那一本。所有操作收敛到“翻页”这一个动作上，读起来像在翻一本借阅登记簿。',
+    features: [
+      {
+        title: '只记录，不评分',
+        body: '每本书只有三个字段：开始时间、当前页码、一句话。没有星级，没有标签墙，也没有“已读完”的庆祝动画。',
+      },
+      {
+        title: '书架按年份生长',
+        body: '书脊的宽度由页数决定，颜色由阅读速度决定。一年下来，这一排书脊本身就是一张阅读的侧写。',
+      },
+      {
+        title: '离线优先',
+        body: '数据存在本地 IndexedDB 里，断网也能写。导出是一个纯文本文件，随时可以带走。',
+      },
+    ],
+    process: [
+      {
+        title: '先删掉一半功能',
+        body: '第一版做了 14 个功能，包括社交和推荐。把它给三个朋友试用后，所有人都只用了“加一本书”和“改页码”。于是删到只剩这两个。',
+      },
+      {
+        title: '书脊的宽度问题',
+        body: '最初用统一宽度的色块表示书，排出来像一份报表。改成按页数计算宽度后，书架忽然有了节奏，也终于像书架了。',
+      },
+      {
+        title: '把统计做得更少',
+        body: '年度回顾一开始有 8 张图表。最后只留了一张：每月读了多少页。少的那 7 张并没有让人少知道什么。',
+      },
+    ],
+    technology: ['React', 'TypeScript', 'IndexedDB', 'CSS Grid', 'Vite'],
+    content:
+      '这个项目至今仍在使用，也已经改过四轮。它让我确认了一件事：克制不是少做，而是把注意力放回真正被使用的那部分。',
+  },
+  {
+    id: 'atlas-of-notes',
+    code: 'LP·2025·03',
+    title: '知识地图',
+    titleEn: 'ATLAS OF NOTES',
+    category: 'learning-projects',
+    year: 2025,
+    month: 4,
+    order: 95,
+    featured: true,
+    summary: '把三年积累的笔记重组成一张可以走进去的地图，而不是一个文件夹。',
+    description:
+      '一次关于“个人知识该如何被看见”的尝试。它不按文件夹组织笔记，而是按概念之间的距离，把零散的记录连成一片可漫游的地形。',
+    cover: {
+      id: 'atlas-cover',
+      caption: '',
+      alt: '知识地图的封面图版：深蓝底上散布的节点与连接线。',
+      ratio: 'landscape',
+      plate: { motif: 'orbit', tone: 'navy', density: 18 },
+    },
+    gallery: [
+      {
+        id: 'atlas-1',
+        caption: '总览。节点大小对应被引用的次数，连线只在两篇笔记共享两个以上概念时出现。',
+        alt: '知识地图总览的节点结构图版。',
+        ratio: 'wide',
+        plate: { motif: 'orbit', tone: 'navy', density: 26 },
+      },
+      {
+        id: 'atlas-2',
+        caption: '局部放大。同一主题下的笔记会自然聚成一簇，簇与簇之间的空白同样是信息。',
+        alt: '知识地图局部放大的图版。',
+        ratio: 'square',
+        plate: { motif: 'orbit', tone: 'ink', density: 12 },
+      },
+      {
+        id: 'atlas-3',
+        caption: '笔记阅读页。右侧常驻一条“相邻笔记”列表，替代传统的上一篇 / 下一篇。',
+        alt: '笔记阅读页的排版结构图版。',
+        ratio: 'portrait',
+        plate: { motif: 'lines', tone: 'paper', density: 8 },
+      },
+    ],
+    tags: ['知识管理', '可视化', '信息架构'],
+    projectUrl: '',
+    background:
+      '写了三年笔记，数量到了两千多条，但我几乎不再打开它们。文件夹越分越细，找东西却越来越慢——因为我知道东西在，只是不知道它在哪。这个项目想解决的不是“存储”，而是“重新遇见”。',
+    designConcept:
+      '把笔记当作地形而不是清单。距离代表概念的远近，密度代表思考的厚度。视觉上放弃了常见的深色星空风格，改用一张浅色底图加细线，像一本地质图册：安静、可标注、可以打印出来贴在墙上。',
+    features: [
+      {
+        title: '按概念而不是文件夹组织',
+        body: '每篇笔记提取三到五个概念，节点之间由共享概念自动连线。分类是结果，不是前提。',
+      },
+      {
+        title: '可以漫游的阅读路径',
+        body: '从任意一个节点出发，沿着连线走，会得到一条只属于这次阅读的路径。路径可以保存成一份“考察记录”。',
+      },
+      {
+        title: '空白也是内容',
+        body: '没有笔记连接的区域会保留为空白，它标出了我从未认真想过的地方。',
+      },
+    ],
+    process: [
+      {
+        title: '从图谱退回到地图',
+        body: '第一版用了力导向图，节点到处乱飞，看起来很像那么回事，但没有人愿意在上面读第二眼。后来固定了布局，宁可牺牲“智能”，换取可记忆的位置。',
+      },
+      {
+        title: '概念提取的取舍',
+        body: '试过用模型自动打标签，准确率不错，但生成的标签太像关键词。最后改成半自动：模型给候选，我手动确认，宁可少，也要是我自己的词。',
+      },
+      {
+        title: '性能',
+        body: '两千个节点在移动端会掉帧。用 canvas 分层绘制，静态层只画一次，交互层只重绘被选中的部分。',
+      },
+    ],
+    technology: ['React', 'TypeScript', 'Canvas 2D', 'D3 (布局计算)', 'Vite'],
+    content:
+      '这是我第一个真正“为自己”做的学习项目。它没有用户，但它改变了我记笔记的方式：现在每写一条，我都会想它该连到哪里。',
+  },
+  {
+    id: 'nowhere',
+    code: 'CW·2025·05',
+    title: '无名之地',
+    titleEn: 'NOWHERE',
+    category: 'creative-works',
+    year: 2025,
+    month: 9,
+    order: 98,
+    featured: true,
+    summary: '一个虚构地域的图志：三十六处地点、四条河流，和一份没有结尾的编年史。',
+    description:
+      '持续写作中的原创世界观。它不以小说推进，而以地方志的方式展开：每个地点有自己的地形、气候、方言词和一段被记错的历史。',
+    cover: {
+      id: 'nowhere-cover',
+      caption: '',
+      alt: '无名之地的封面图版：近黑底色上一个被裁切的巨大衬线字母。',
+      ratio: 'portrait',
+      plate: { motif: 'letter', tone: 'ink', density: 1 },
+    },
+    gallery: [
+      {
+        id: 'nw-1',
+        caption: '总图。四条河流把大陆分成五个区域，边界用虚线表示——它们一直在变。',
+        alt: '无名之地总图的线条图版。',
+        ratio: 'wide',
+        plate: { motif: 'lines', tone: 'ink', density: 14 },
+      },
+      {
+        id: 'nw-2',
+        caption: '地方志条目。左栏是地名与坐标，右栏是正文，页边留出批注的位置。',
+        alt: '地方志条目的排版结构图版。',
+        ratio: 'portrait',
+        plate: { motif: 'stack', tone: 'paper', density: 6 },
+      },
+      {
+        id: 'nw-3',
+        caption: '方言词表。每个词标注了它第一次出现的地点，很多词只出现过一次。',
+        alt: '方言词表的网格图版。',
+        ratio: 'square',
+        plate: { motif: 'grid', tone: 'brick', density: 10 },
+      },
+    ],
+    tags: ['世界观', '写作', '图志', '长期项目'],
+    projectUrl: '',
+    background:
+      '这个项目开始于一张画错的地图。我本来想给另一个故事画一张地形图，画到一半发现海岸线的形状更有意思，于是把故事丢下，开始给这片不存在的土地写说明书。',
+    designConcept:
+      '刻意模仿地方志的体例：条目化、去情节化、允许矛盾。视觉上参考十九世纪的地图册与当代档案文件的混合——衬线标题、等宽坐标、大量页边空白。它应该读起来像一份被反复增补过的资料，而不是一本设定集。',
+    features: [
+      {
+        title: '地点条目',
+        body: '三十六处地点，每处包含地形、气候、物产、方言词与一则传闻。传闻之间互相矛盾，且不打算解释。',
+      },
+      {
+        title: '四条河流',
+        body: '河流是唯一贯穿全部条目的线索。沿着任何一条河读下去，会得到一条完全不同的叙事顺序。',
+      },
+      {
+        title: '编年史残卷',
+        body: '一份从第三年开始的记录，前两年遗失。所有事件都只有年份，没有月份。',
+      },
+    ],
+    process: [
+      {
+        title: '先画地图，后写文字',
+        body: '地图决定了所有后续写作。为了让地形合理，我查了不少真实流域的资料，最后只保留了“河往低处走”这一条常识。',
+      },
+      {
+        title: '允许自己写错',
+        body: '早期版本试图保持设定自洽，结果越写越僵。后来引入“记录者也会犯错”的设定，矛盾反而成了内容。',
+      },
+      {
+        title: '排版即世界',
+        body: '试过做成网页交互地图，效果很热闹，但削弱了“读资料”的感觉。最终回到静态版面：一张图，一段文，一条细线。',
+      },
+    ],
+    technology: ['Figma', 'InDesign', 'Markdown', '手绘'],
+    content:
+      '这是目前耗时最长的一个项目，仍在增补。它没有终点，也不需要终点。',
+  },
+  {
+    id: 'echo',
+    code: 'EX·2026·07',
+    title: '回声',
+    titleEn: 'ECHO',
+    category: 'experiments',
+    year: 2026,
+    month: 1,
+    order: 99,
+    featured: true,
+    summary: '一个只会重复你最后一句话的对话界面，用来观察人如何面对没有回应的回应。',
+    description:
+      '技术实验。界面完整地模拟了一次对话，但对方永远只把你的话换一种说法还给你。它不解决问题，只让问题停留得久一点。',
+    cover: {
+      id: 'echo-cover',
+      caption: '',
+      alt: '回声的封面图版：深蓝底上高低不一的竖条，像一段声波。',
+      ratio: 'landscape',
+      plate: { motif: 'bars', tone: 'navy', density: 28 },
+    },
+    gallery: [
+      {
+        id: 'ec-1',
+        caption: '对话界面。回应永远比输入短一行，且从不使用第二人称。',
+        alt: '对话界面的排版结构图版。',
+        ratio: 'portrait',
+        plate: { motif: 'lines', tone: 'paper', density: 9 },
+      },
+      {
+        id: 'ec-2',
+        caption: '延迟曲线。停顿长度由句子长度决定，最长四秒，不允许跳过。',
+        alt: '延迟曲线的柱状图版。',
+        ratio: 'wide',
+        plate: { motif: 'bars', tone: 'ink', density: 16 },
+      },
+      {
+        id: 'ec-3',
+        caption: '结束页。对话不会保存，离开即消失，只留下一个时间戳。',
+        alt: '结束页的图版。',
+        ratio: 'square',
+        plate: { motif: 'arcs', tone: 'brick', density: 4 },
+      },
+    ],
+    tags: ['AI', '交互实验', '对话界面'],
+    projectUrl: '',
+    background:
+      '在大量使用对话式工具之后，我开始注意一件事：它们总是太快地给出答案。这个实验想反过来，做一个不提供答案、但完整保留对话形式的界面，看看人会不会继续说下去。',
+    designConcept:
+      '把“回应”降级为“重复”。视觉上极度节制：只有两种字号、一条分隔线、一个输入框。没有头像，没有气泡，没有打字动画——只有文字出现前那段真实的、令人不安的空白。',
+    features: [
+      {
+        title: '镜像式回应',
+        body: '系统把你的句子改写成陈述句返回，不提问、不建议、不总结。第二人称被全部移除。',
+      },
+      {
+        title: '不可跳过的停顿',
+        body: '停顿长度与句子长度成正比。等待是设计的一部分，不是性能问题。',
+      },
+      {
+        title: '不留存',
+        body: '对话不写入存储，刷新即消失。页面关闭前只显示本次对话的时长。',
+      },
+    ],
+    process: [
+      {
+        title: '从“有用”退回到“在场”',
+        body: '最初几版都在想办法让回应更有价值，结果变成了一个劣质客服。删掉所有功能后，它才开始有意思。',
+      },
+      {
+        title: '措辞比模型重要',
+        body: '回应的质量几乎完全取决于改写规则，而不是模型大小。最终用的是规则加少量模型润色。',
+      },
+      {
+        title: '停顿的实验',
+        body: '测试时把延迟从 0 调到 4 秒，人们的行为差异极大。1.5 秒左右最接近“有人在想”，于是定在这个区间。',
+      },
+    ],
+    technology: ['React', 'TypeScript', 'Edge Functions', 'LLM API'],
+    content:
+      '它不是一个产品，也不打算成为产品。但我从中学到的东西，后来被用在了所有更“有用”的项目里。',
+  },
+  {
+    id: 'lightkeep',
+    code: 'DP·2023·02',
+    title: '拾光',
+    titleEn: 'LIGHTKEEP',
+    category: 'digital-products',
+    year: 2023,
+    month: 6,
+    order: 80,
+    featured: false,
+    summary: '以 90 分钟为一块的时间记录器，把一天当作可以被摆放的积木。',
+    description:
+      '一个时间块工具。它不统计你浪费了多少时间，只让你看见一天被切成了几块，以及每一块去了哪里。',
+    cover: {
+      id: 'lightkeep-cover',
+      caption: '',
+      alt: '拾光的封面图版：砖红色底上的一组同心弧线。',
+      ratio: 'portrait',
+      plate: { motif: 'arcs', tone: 'brick', density: 5 },
+    },
+    gallery: [
+      {
+        id: 'lk-1',
+        caption: '一日视图。每块 90 分钟，未填写的块保持空白，不显示为“浪费”。',
+        alt: '一日视图的网格图版。',
+        ratio: 'square',
+        plate: { motif: 'grid', tone: 'paper', density: 8 },
+      },
+      {
+        id: 'lk-2',
+        caption: '一周视图。色块的堆叠方式比数字更能说明问题。',
+        alt: '一周视图的堆叠图版。',
+        ratio: 'wide',
+        plate: { motif: 'stack', tone: 'brick', density: 12 },
+      },
+      {
+        id: 'lk-3',
+        caption: '计时界面。只有一个圆环和剩余时间，没有开始按钮以外的任何控件。',
+        alt: '计时界面的同心弧图版。',
+        ratio: 'portrait',
+        plate: { motif: 'arcs', tone: 'ink', density: 3 },
+      },
+    ],
+    tags: ['时间管理', '工具', '产品设计'],
+    projectUrl: '',
+    background:
+      '那年我在准备一场考试，需要长时间专注，但所有番茄钟都在用 25 分钟打断我。我想要的不是更频繁的休息，而是一段足够长的、不被打扰的时间。',
+    designConcept:
+      '以 90 分钟为一个基本单位，因为这是一个完整的注意力周期。视觉上把一天画成一张可以被摆放的格子纸，色块之间保留缝隙——缝隙是刻意的，它提醒你一天里本来就有空白。',
+    features: [
+      {
+        title: '90 分钟一块',
+        body: '一天被切成十块左右。开始一块只需要点一下，结束也是。不做中断记录。',
+      },
+      {
+        title: '不计算浪费',
+        body: '空白块不会变成红色，也不会有“效率评分”。它只是空着。',
+      },
+      {
+        title: '一周一页',
+        body: '一周视图可以导出为一张 A4 页面，打印出来贴在桌前。',
+      },
+    ],
+    process: [
+      {
+        title: '先做纸的版本',
+        body: '在写代码之前，我用打印的格子纸记录了三个星期。确认了这个节奏适合自己，才开始做界面。',
+      },
+      {
+        title: '去掉计时提醒',
+        body: '早期版本会在结束时响铃，结果每次都被吓一跳。改成屏幕缓慢变暗，安静得多。',
+      },
+      {
+        title: '导出比同步重要',
+        body: '没有做账号系统。数据在本机，导出是一张 SVG。三年过去，这个决定仍然是对的。',
+      },
+    ],
+    technology: ['React', 'TypeScript', 'SVG', 'LocalStorage'],
+    content: '',
+  },
+  {
+    id: 'study-room',
+    code: 'LP·2023·04',
+    title: '学社',
+    titleEn: 'STUDY ROOM',
+    category: 'learning-projects',
+    year: 2023,
+    month: 2,
+    order: 70,
+    featured: false,
+    summary: '为一门自修课程做的阅读站点：十二讲、一份书单，和可以打印的讲义。',
+    description:
+      '把一次为期三个月的自修整理成公开的课程网页。它按讲次组织，每一讲都包含导读、原文摘录、延伸阅读和一份可打印的讲义。',
+    cover: {
+      id: 'study-room-cover',
+      caption: '',
+      alt: '学社的封面图版：橄榄绿底上的模块化网格。',
+      ratio: 'landscape',
+      plate: { motif: 'grid', tone: 'olive', density: 14 },
+    },
+    gallery: [
+      {
+        id: 'sr2-1',
+        caption: '课程目录。讲次编号与阅读量并列，方便判断一次能读多少。',
+        alt: '课程目录的表格结构图版。',
+        ratio: 'portrait',
+        plate: { motif: 'stack', tone: 'paper', density: 12 },
+      },
+      {
+        id: 'sr2-2',
+        caption: '讲义页面。为 A4 打印设计，正文栏宽 68 字符，页边留给批注。',
+        alt: '讲义页面的排版结构图版。',
+        ratio: 'portrait',
+        plate: { motif: 'lines', tone: 'paper', density: 11 },
+      },
+      {
+        id: 'sr2-3',
+        caption: '书单。按难度而非作者排序，同一本书可能出现在多个讲次里。',
+        alt: '书单的网格图版。',
+        ratio: 'wide',
+        plate: { motif: 'grid', tone: 'ink', density: 9 },
+      },
+    ],
+    tags: ['课程', '排版', '自修'],
+    projectUrl: '',
+    background:
+      '有一年我给自己排了一门课，每周读一本书、写一篇笔记。三个月后笔记散落在各处，既不成体系，也无法重读。这个站点是把那三个月重新组织一遍的结果，同时也是一份可以给别人用的材料。',
+    designConcept:
+      '按印刷讲义的标准做网页：固定的正文栏宽、真实的页边距、可以打印的样式表。屏幕上它像一本书，打印出来它就是一份讲义。所有装饰都被删掉，只留下标题、正文、引文和页码。',
+    features: [
+      {
+        title: '十二讲',
+        body: '每一讲包含导读、三段原文摘录、两到四条延伸阅读，以及一份两页的讲义。',
+      },
+      {
+        title: '为打印而设计',
+        body: '单独的打印样式：去掉导航与背景，正文改为 10.5pt，页脚自动加页码。',
+      },
+      {
+        title: '可引用的段落',
+        body: '每个段落有稳定的锚点，可以直接复制链接指向某一句话。',
+      },
+    ],
+    process: [
+      {
+        title: '先定栏宽',
+        body: '整个站点的排版是从“一行放多少个字”开始倒推的。定了 68 字符之后，字号、页边距和图片宽度都跟着确定了。',
+      },
+      {
+        title: '打印稿救了网页',
+        body: '把页面打印出来之后，发现了大量屏幕上没注意到的问题：行距太紧、标题与正文距离不对、引文没有呼吸感。',
+      },
+      {
+        title: '克制地使用颜色',
+        body: '原本每个讲次一个颜色，打印出来像一本儿童读物。最后只保留一种橄榄绿，用在讲次编号上。',
+      },
+    ],
+    technology: ['React', 'TypeScript', 'CSS (print styles)', 'MDX'],
+    content: '',
+  },
+  {
+    id: 'letterpress',
+    code: 'CW·2022·06',
+    title: '铅字',
+    titleEn: 'LETTERPRESS',
+    category: 'creative-works',
+    year: 2022,
+    month: 5,
+    order: 60,
+    featured: false,
+    summary: '一套只有 48 个字的展示字体，以及用它排的十二张海报。',
+    description:
+      '字体与排版练习。字形从旧式铅字的磨损边缘出发，刻意保留不规则；十二张海报用同一套字，排十二种不同的版面结构。',
+    cover: {
+      id: 'letterpress-cover',
+      caption: '',
+      alt: '铅字的封面图版：砖红色底上被放大的衬线字形局部。',
+      ratio: 'portrait',
+      plate: { motif: 'letter', tone: 'brick', density: 1 },
+    },
+    gallery: [
+      {
+        id: 'lp-1',
+        caption: '字形表。48 个字，每个字都有一处刻意的不对称。',
+        alt: '字形表的网格图版。',
+        ratio: 'square',
+        plate: { motif: 'grid', tone: 'paper', density: 16 },
+      },
+      {
+        id: 'lp-2',
+        caption: '海报 04。标题压在图片边缘上，制造一点印刷事故的感觉。',
+        alt: '海报排版的图版。',
+        ratio: 'portrait',
+        plate: { motif: 'letter', tone: 'ink', density: 1 },
+      },
+      {
+        id: 'lp-3',
+        caption: '海报 09。整张只有一条横线和一个字，靠位置说话。',
+        alt: '极简海报的线条图版。',
+        ratio: 'portrait',
+        plate: { motif: 'lines', tone: 'paper', density: 2 },
+      },
+    ],
+    tags: ['字体', '海报', '排版'],
+    projectUrl: '',
+    background:
+      '我想知道，在只有几十个字的情况下，一套字能表达多少东西。于是给自己定了限制：只做 48 个常用字，只排十二张海报，不做任何插图。',
+    designConcept:
+      '字形参考旧式铅字的物理特征：笔画末端的轻微膨胀、转角处的圆钝、字面不绝对居中。这些“不完美”在屏幕上被保留下来，作为对抗过度平滑的一种方式。海报则完全依赖网格与留白，每张只解决一个排版问题。',
+    features: [
+      {
+        title: '48 个字形',
+        body: '覆盖十二张海报用到的全部文字。每个字都手工调整过重心，不追求统一。',
+      },
+      {
+        title: '十二张海报',
+        body: '同一套字，十二种结构：居中的、偏右的、压边的、只有一条线的。',
+      },
+      {
+        title: '可下载的字形表',
+        body: '一张 A2 尺寸的 PDF，包含全部字形与使用说明。',
+      },
+    ],
+    process: [
+      {
+        title: '从拓印开始',
+        body: '先拓了几十个真实的铅字，扫描后作为轮廓参考。数字化的过程中不断丢失细节，于是反过来手工补回。',
+      },
+      {
+        title: '限制带来的自由',
+        body: '只有 48 个字，意味着每张海报的文案必须被压缩到极短。这反而让版面变得更清楚。',
+      },
+      {
+        title: '放弃做成字体文件',
+        body: '尝试过打包成 woff2，但字距与连字问题太多。最终以 SVG 字形加手工排版交付，更笨，但更准确。',
+      },
+    ],
+    technology: ['Illustrator', 'Glyphs (试用)', 'SVG', 'InDesign'],
+    content: '',
+  },
+  {
+    id: 'grid-study',
+    code: 'EX·2024·08',
+    title: '网格',
+    titleEn: 'GRID STUDY',
+    category: 'experiments',
+    year: 2024,
+    month: 3,
+    order: 75,
+    featured: false,
+    summary: '一个可以调整栏数与基线网格的排版沙盒，用来观察版面如何改变阅读。',
+    description:
+      '交互实验。拖动参数改变栏数、栏距与基线，同一段文字会在几秒内变成完全不同的读物。它不产出设计，只让版面的因果关系变得可见。',
+    cover: {
+      id: 'grid-cover',
+      caption: '',
+      alt: '网格的封面图版：砖红色底上的不对称模块网格。',
+      ratio: 'landscape',
+      plate: { motif: 'grid', tone: 'brick', density: 11 },
+    },
+    gallery: [
+      {
+        id: 'gs-1',
+        caption: '三栏与单栏的对照。同一段文字，阅读速度与理解方式并不相同。',
+        alt: '多栏与单栏对照的网格图版。',
+        ratio: 'wide',
+        plate: { motif: 'grid', tone: 'paper', density: 12 },
+      },
+      {
+        id: 'gs-2',
+        caption: '基线网格。开启后所有行都落在同一条基线上，包括标题与图注。',
+        alt: '基线网格的线条图版。',
+        ratio: 'square',
+        plate: { motif: 'lines', tone: 'ink', density: 20 },
+      },
+      {
+        id: 'gs-3',
+        caption: '不对称版面。留白被推到一侧，重心随之移动。',
+        alt: '不对称版面的模块图版。',
+        ratio: 'portrait',
+        plate: { motif: 'stack', tone: 'paper', density: 5 },
+      },
+    ],
+    tags: ['排版', '交互', '教学工具'],
+    projectUrl: '',
+    background:
+      '在给别人讲排版的时候，我发现最难说清的是“为什么这样排更好看”。语言总是绕开重点，于是我做了这个沙盒：不解释，直接让人拖着看。',
+    designConcept:
+      '界面本身就是它的内容。控制项被压缩到页面边缘，中间是唯一的主角——一段真实的文字。所有参数都是连续的，没有预设模板，因为模板会让人停止思考。',
+    features: [
+      {
+        title: '四个连续参数',
+        body: '栏数、栏距、基线、字号。全部用拖拽调整，没有输入框，也没有“推荐值”。',
+      },
+      {
+        title: '真实文本',
+        body: '用的是一段关于排版本身的文章，而不是假文。这样版面的变化才能被读出来。',
+      },
+      {
+        title: '并排对比',
+        body: '可以冻结当前版面，再调另一组参数，两版并排比较。',
+      },
+    ],
+    process: [
+      {
+        title: '一开始想做成课程',
+        body: '写了六节讲解，越写越像教科书。最后全部删掉，只留沙盒——让人自己发现，比讲给他听有效。',
+      },
+      {
+        title: '参数之间的耦合',
+        body: '字号一改，基线和栏距都要跟着变。为了让调整手感自然，把三个参数绑定在同一个比例系统里。',
+      },
+      {
+        title: '移动端的取舍',
+        body: '手机上无法并排对比，改成上下滑动切换，并保留一个“记住这一版”的按钮。',
+      },
+    ],
+    technology: ['React', 'TypeScript', 'CSS Variables', 'Pointer Events'],
+    content: '',
+  },
+];
+
+/** 默认顺序：order 降序 */
+export const sortedProjects = [...projects].sort((a, b) => b.order - a.order);
+
+export const featuredProjects = sortedProjects.filter((p) => p.featured);
+
+export function getProject(id: string): Project | undefined {
+  return projects.find((p) => p.id === id);
+}
+
+/** 所有出现过的年份，降序 */
+export const archiveYears = Array.from(new Set(projects.map((p) => p.year))).sort(
+  (a, b) => b - a,
+);
+
+export function countByCategory(id: string): number {
+  return projects.filter((p) => p.category === id).length;
+}

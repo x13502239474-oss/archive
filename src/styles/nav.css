@@ -1,0 +1,337 @@
+/* ===========================================================================
+   导航
+   =========================================================================== */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--paper);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.4s var(--ease);
+}
+
+.nav[data-scrolled='true'] {
+  border-bottom-color: var(--rule);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: var(--nav-h);
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--margin);
+}
+
+.nav__brand {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  min-width: 0;
+}
+
+.nav__name {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.nav__sep {
+  width: 1px;
+  height: 12px;
+  background: var(--rule);
+  transform: translateY(1px);
+  flex: none;
+}
+
+.nav__sub {
+  font-size: 0.8125rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.nav__links {
+  display: none;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav__link {
+  position: relative;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  padding-block: 6px;
+  transition: color 0.3s var(--ease);
+}
+
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--brick);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease);
+}
+
+.nav__link:hover {
+  color: var(--ink);
+}
+
+.nav__link:hover::after {
+  transform: scaleX(1);
+}
+
+.nav__link[aria-current='page'] {
+  color: var(--ink);
+}
+
+.nav__link[aria-current='page']::after {
+  transform: scaleX(1);
+}
+
+/* 移动端触发按钮 ---------------------------------------------------------- */
+.nav__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding-inline: 4px;
+  margin-right: -4px;
+}
+
+.nav__toggle-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.nav__glyph {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 22px;
+  height: 22px;
+}
+
+.nav__glyph span {
+  display: block;
+  height: 1px;
+  background: var(--ink);
+  transition: transform 0.4s var(--ease), opacity 0.3s var(--ease);
+}
+
+.nav__glyph span:last-child {
+  width: 14px;
+  margin-left: auto;
+}
+
+.nav__toggle[aria-expanded='true'] .nav__glyph span:first-child {
+  transform: translateY(2.5px) rotate(45deg);
+}
+
+.nav__toggle[aria-expanded='true'] .nav__glyph span:last-child {
+  width: 22px;
+  transform: translateY(-2.5px) rotate(-45deg);
+}
+
+@media (min-width: 760px) {
+  .nav__links {
+    display: flex;
+  }
+
+  .nav__toggle {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav__sep,
+  .nav__sub {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   全屏目录
+   --------------------------------------------------------------------------- */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: menu-in 0.4s var(--ease) both;
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.menu__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-h);
+  flex: none;
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--margin);
+}
+
+.menu__close {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.menu__close .nav__glyph span:first-child {
+  transform: translateY(2.5px) rotate(45deg);
+}
+
+.menu__close .nav__glyph span:last-child {
+  width: 22px;
+  transform: translateY(-2.5px) rotate(-45deg);
+}
+
+.menu__body {
+  flex: 1;
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: 32px var(--margin) 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.menu__list {
+  border-top: 1px solid var(--rule);
+}
+
+.menu__item {
+  border-bottom: 1px solid var(--rule);
+  animation: menu-item 0.55s var(--ease) both;
+}
+
+@keyframes menu-item {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.menu__item:nth-child(1) {
+  animation-delay: 50ms;
+}
+.menu__item:nth-child(2) {
+  animation-delay: 100ms;
+}
+.menu__item:nth-child(3) {
+  animation-delay: 150ms;
+}
+.menu__item:nth-child(4) {
+  animation-delay: 200ms;
+}
+.menu__item:nth-child(5) {
+  animation-delay: 250ms;
+}
+
+.menu__link {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 0 16px;
+}
+
+.menu__idx {
+  font-size: 0.8125rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.menu__label {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 7.5vw, 2.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.menu__label em {
+  display: block;
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: 0.8125rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-top: 6px;
+}
+
+.menu__arrow {
+  color: var(--ink-3);
+  transition: transform 0.4s var(--ease), color 0.3s var(--ease);
+}
+
+.menu__link:hover .menu__arrow,
+.menu__link:focus-visible .menu__arrow {
+  transform: translateX(4px);
+  color: var(--brick);
+}
+
+.menu__link[aria-current='page'] .menu__label {
+  color: var(--brick);
+}
+
+.menu__foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+
+.menu__foot .meta {
+  color: var(--ink-3);
+}

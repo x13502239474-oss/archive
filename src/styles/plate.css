@@ -1,0 +1,54 @@
+/* ===========================================================================
+   图版：在真实截图出现之前，用排版语言为作品绘制的封面
+   =========================================================================== */
+
+.plate {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+
+.plate__media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 1.2s var(--ease);
+}
+
+.plate__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 比例 ------------------------------------------------------------------- */
+.ratio--portrait {
+  aspect-ratio: 4 / 5;
+}
+.ratio--landscape {
+  aspect-ratio: 3 / 2;
+}
+.ratio--square {
+  aspect-ratio: 1 / 1;
+}
+.ratio--wide {
+  aspect-ratio: 16 / 9;
+}
+.ratio--tall {
+  aspect-ratio: 2 / 3;
+}
+
+/* 悬停：容器内的媒体轻微放大 --------------------------------------------- */
+.plate-hover:hover .plate__media,
+.plate-hover:focus-visible .plate__media {
+  transform: scale(1.035);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plate-hover:hover .plate__media,
+  .plate-hover:focus-visible .plate__media {
+    transform: none;
+  }
+}
