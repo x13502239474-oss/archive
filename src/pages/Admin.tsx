@@ -11,6 +11,7 @@ import {
   type RepoRef,
 } from '../lib/github';
 import { usePageMeta } from '../hooks/useSite';
+import { withBase } from '../lib/paths';
 import { validateArchive } from '../content/validate.mjs';
 import '../styles/admin.css';
 
@@ -128,7 +129,7 @@ function ImageSlot({
   onRatio: (ratio: ProjectImage['ratio']) => void;
 }) {
   const input = useRef<HTMLInputElement>(null);
-  const preview = pending?.preview ?? image.src;
+  const preview = pending?.preview ?? withBase(image.src);
 
   return (
     <div className="slot">
@@ -315,22 +316,16 @@ export default function Admin() {
       const { base64 } = await compressImage(file);
       const key = target === 'cover' ? 'cover' : `g${target + 1}`;
       const path = `public/images/${draft.id}/${key}.jpg`;
+      const src = `/images/${draft.id}/${key}.jpg`;
       const preview = `data:image/jpeg;base64,${base64}`;
       setDraft((d) => {
         if (!d) return d;
         const pending = { ...d.pending, [path]: { base64, preview } };
         if (target === 'cover') {
-          return {
-            ...d,
-            pending,
-            cover: { ...d.cover, src: `/${path.replace(/^public/, '')}` },
-          };
+          return { ...d, pending, cover: { ...d.cover, src } };
         }
         const gallery = [...d.gallery];
-        gallery[target] = {
-          ...gallery[target],
-          src: `/${path.replace(/^public/, '')}`,
-        };
+        gallery[target] = { ...gallery[target], src };
         return { ...d, pending, gallery };
       });
     } catch (e) {

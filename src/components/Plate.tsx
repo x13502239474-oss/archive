@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import type { ImageRatio, Plate as PlateData, PlateTone } from '../types';
+import { withBase } from '../lib/paths';
 import '../styles/plate.css';
 
 /**
@@ -369,7 +370,12 @@ export default function Plate({
     >
       <div className="plate__media">
         {src ? (
-          <img src={src} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+          <img
+            src={withBase(src)}
+            alt={alt}
+            loading={eager ? 'eager' : 'lazy'}
+            decoding="async"
+          />
         ) : (
           <svg
             viewBox={`0 0 ${w} ${h}`}
