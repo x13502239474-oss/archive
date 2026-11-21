@@ -171,7 +171,7 @@ npm test          # 交互自测（需要先 npm run preview）
 - **首屏标题**：`site.headline`，数组每一项是一行
 - **图版配色**：`src/components/Plate.tsx` 顶部的 `TONES`
 
-默认是暖纸白 + 近黑 + 砖红，Newsreader（衬线）+ Archivo（无衬线）。想换成冷色或深色，只改 tokens 里的色值，组件不用动。
+默认是暖纸白 + 近黑 + 砖红；中文用 Noto Serif SC，西文与数字用 Newsreader，标签导航用 Archivo。想换成冷色或深色，只改 tokens 里的色值，组件不用动。
 
 ---
 
