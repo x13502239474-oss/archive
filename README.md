@@ -36,17 +36,17 @@ npm run check     # 只校验内容，不启动服务器
   · projects[3].cover.alt — 必须填写（无障碍描述）
 ```
 
-### 3. 打开 Pages
+### 3. 等它上线
 
-仓库 **Settings → Pages → Source** 选 **GitHub Actions**。
-
-之后每次 push 到 `main`，都会自动构建并发布。地址是：
+推送到 `main` 后，GitHub Actions 会自动构建、自动开启 Pages 并发布。地址是：
 
 ```
 https://<你的用户名>.github.io/<仓库名>/
 ```
 
 子路径、路由、深链接都已经处理好了，仓库叫什么都行。
+
+如果第一次运行失败了，去 **Settings → Pages → Source** 手动选 **GitHub Actions**，再在 Actions 页面点 **Re-run jobs**。
 
 ---
 
