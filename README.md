@@ -4,6 +4,10 @@
 
 React + TypeScript + Vite，无后端，作品数据集中在 `src/data/` 内，新增作品不需要改动任何页面代码。
 
+**线上地址**：https://x13502239474-oss.github.io/archive/
+
+推送到 `main` 分支后由 GitHub Actions 自动构建并发布到 GitHub Pages。
+
 ---
 
 ## 快速开始
@@ -129,7 +133,9 @@ src/
 
 ## 部署
 
-`npm run build` 后把 `dist/` 上传到任意静态托管。站点使用 history 路由，需要 SPA 回退：
+已配置 GitHub Actions（`.github/workflows/deploy.yml`）：推送到 `main` 即自动构建并发布到 GitHub Pages，构建时注入 `VITE_BASE=/archive/`，路由 basename 自动跟随。
+
+本地手动部署到其他静态托管：`npm run build` 后上传 `dist/`，并配置 SPA 回退：
 
 - Netlify / Cloudflare Pages：`public/_redirects` 已包含 `/* /index.html 200`
 - Vercel：`vercel.json` 已包含 rewrite 规则
