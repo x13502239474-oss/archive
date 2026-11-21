@@ -20,7 +20,9 @@
 
 打开 **`src/content/archive.json`**，把里面的内容换成你自己的。
 
-这是**唯一**需要改的文件：姓名、简介、联系方式、分类、作品、关于页，全在里面。改完在本地跑一次：
+这是**唯一**需要改的文件：姓名、简介、联系方式、分类、作品、关于页，全在里面。文件里自带 8 件示例作品，删到只剩你自己的即可。
+
+改完在本地跑一次：
 
 ```bash
 npm install
@@ -158,6 +160,8 @@ npm test          # 交互自测（需要先 npm run preview）
 - Netlify / Cloudflare Pages：`public/_redirects` 已含 `/* /index.html 200`
 - Vercel：`vercel.json` 已含 rewrite
 - Nginx：`try_files $uri $uri/ /index.html;`
+
+用自定义域名时，把 `VITE_BASE` 改成 `/`（工作流里那一步），否则资源会去 `/仓库名/` 下面找。
 
 ---
 
