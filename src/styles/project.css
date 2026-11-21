@@ -140,6 +140,14 @@
   max-height: 620px;
 }
 
+/* 竖版或方形截图：整张显示，居中，两侧留白 */
+.proj-cover--tall .plate {
+  width: auto;
+  height: min(620px, 72vh);
+  max-height: none;
+  margin-inline: auto;
+}
+
 .proj-cover__cap {
   display: flex;
   flex-wrap: wrap;
@@ -157,9 +165,15 @@
 }
 
 @media (max-width: 699px) {
-  .proj-cover .plate {
+  .proj-cover:not(.proj-cover--tall) .plate {
     aspect-ratio: 4 / 3;
     max-height: none;
+  }
+
+  .proj-cover--tall .plate {
+    width: 100%;
+    height: auto;
+    margin-inline: 0;
   }
 }
 

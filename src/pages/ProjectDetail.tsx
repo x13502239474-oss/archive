@@ -75,6 +75,11 @@ export default function ProjectDetail() {
 
   const p = project;
   const cat = getCategory(p.category);
+  // 有真实图片时按作者选的比例展示，避免截图被裁；没有图片时用宽幅图版
+  const hasRealCover = Boolean(p.cover.src);
+  const coverRatio = hasRealCover ? p.cover.ratio : 'wide';
+  const coverTall =
+    hasRealCover && ['portrait', 'square', 'tall'].includes(p.cover.ratio);
   const index = sortedProjects.findIndex((x) => x.id === p.id);
   const prev = index > 0 ? sortedProjects[index - 1] : null;
   const next = index < sortedProjects.length - 1 ? sortedProjects[index + 1] : null;
@@ -134,12 +139,12 @@ export default function ProjectDetail() {
       </div>
 
       <div className="shell">
-        <figure className="proj-cover" data-reveal="">
+        <figure className={`proj-cover ${coverTall ? 'proj-cover--tall' : ''}`} data-reveal="">
           <Plate
             data={p.cover.plate}
             src={p.cover.src}
             alt={p.cover.alt}
-            ratio="wide"
+            ratio={coverRatio}
             seed={p.code}
             label={p.code}
             glyph={p.titleEn?.[0] ?? p.title[0]}
